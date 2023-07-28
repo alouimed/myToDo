@@ -1,0 +1,20 @@
+<div class="card shadow-lg mt-5">
+  <div class="card-header text-center py-4 border-0">
+    <h1 class="display-6 fw-bold">To Do List</h1>
+  </div>
+  <div class="card-body p-4">
+    <ul class="list-group">
+      <li *ngFor="let todo of (paginatedTodos$ | async)" class="list-group-item mb-2 border py-3 rounded-3">
+        <span>
+          <i [ngClass]="{'fa-solid fa-square': true, 'text-sucsess': todo.state, 'text-danger': !todo.state}" 
+          [style.color]="todo.state ? '#7a8f5b' : '#aa2c2c'"></i>
+         <span>&nbsp;</span>
+          {{ todo.title }}
+         </span>
+      </li>
+    </ul>
+  </div>
+
+  <app-pagination [currentPage]="currentPage" [totalPages]="totalPages" (pageChange)="onPageChange($event)">
+    test</app-pagination>
+</div>
