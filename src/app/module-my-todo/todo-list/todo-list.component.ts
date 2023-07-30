@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Todo } from '../todoModel/todoModel';
 import { TodoService } from 'src/app/module-my-todo/services/todo.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-todo-list',
@@ -15,7 +16,7 @@ export class TodoListComponent implements OnInit {
   itemsPerPage = 5;
   paginatedTodos: Todo[] = [];
 
-  constructor(private todoService: TodoService) { }
+  constructor(private todoService: TodoService, private router: Router) { }
 
   ngOnInit() {
     this.todoService.getTodos().subscribe(todos => {
@@ -45,4 +46,9 @@ export class TodoListComponent implements OnInit {
       this.paginateTodos();
     });
   }
+
+  onTodoItemClick(todo: Todo) {
+    this.router.navigate(['/todos', todo.id]);
+  }
+
 }

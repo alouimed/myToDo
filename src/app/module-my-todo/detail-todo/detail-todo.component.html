@@ -1,1 +1,22 @@
-<p>detail-todo works!</p>
+<div class="card shadow-lg mt-5" *ngIf="todo">
+    <div class="card-header text-center py-4 border-0">
+      <h1 class="display-6 fw-bold">Details To Do : {{todo.id}}</h1>
+    </div>
+    <div class="card-body p-4">
+      <form>
+        <div class="form-group">
+          <input type="text" class="form-control border-1 py-3 shadow-none" [(ngModel)]="todo.title" name="title" readonly>
+        </div>
+        <div class="form-group">
+          <!-- Utilisez todo.description pour le ngModel du textarea -->
+          <textarea class="form-control border-1 py-3 shadow-none" 
+                    id="exampleFormControlTextarea1" rows="3"
+                    [(ngModel)]="todo.description" name="description" readonly>
+          </textarea>
+        </div>
+      </form>
+      <a routerLink="/todos">List toDo</a>
+    </div>
+  </div>
+  
+

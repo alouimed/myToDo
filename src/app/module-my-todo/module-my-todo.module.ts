@@ -7,6 +7,7 @@ import { PaginationComponent } from './pagination/pagination.component';
 import { ModuleMyTodoRoutingModule } from './module-my-todo-routing.module';
 import { AddTodoComponent } from './add-todo/add-todo.component';
 import { DoneToBottomPipe } from './pipes/done-to-bottom.pipe';
+import { FormsModule } from '@angular/forms'; 
 
 
 
@@ -17,10 +18,11 @@ import { DoneToBottomPipe } from './pipes/done-to-bottom.pipe';
     UpdateTodoComponent,
     PaginationComponent,
     AddTodoComponent,
-    DoneToBottomPipe
+    DoneToBottomPipe,
   ],
   imports: [
     CommonModule,
+    FormsModule,
     ModuleMyTodoRoutingModule
   ]
 })

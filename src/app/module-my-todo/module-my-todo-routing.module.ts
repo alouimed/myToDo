@@ -10,7 +10,7 @@ const routes: Routes = [
   { path: '', redirectTo: '/', pathMatch: 'full' },
   { path: '', component: TodoListComponent },
   { path: 'todo/add', component: AddTodoComponent },
-  { path: ':id', component: DetailTodoComponent },
+  { path: 'todos/:id', component: DetailTodoComponent },
   { path: ':id/update', component: UpdateTodoComponent },
 ];
 

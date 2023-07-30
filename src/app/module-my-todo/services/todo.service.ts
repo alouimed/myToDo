@@ -28,4 +28,12 @@ export class TodoService {
     return throwError(new Error('Todo not found.'));
   }
 
+  getTodoById(todoId: number): Observable<Todo> {
+    const todo = this.todos.find(todo => todo.id === todoId);
+    if (todo) {
+      return of(todo);
+    }
+    return throwError(new Error('Todo not found.'));
+  }
+
 }
