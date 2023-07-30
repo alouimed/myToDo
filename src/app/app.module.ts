@@ -8,18 +8,16 @@ import { AppComponent } from './app.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { ModuleMyTodoModule } from './module-my-todo/module-my-todo.module';
 
+
 @NgModule({
   declarations: [
     AppComponent,
-    NavBarComponent
-  ],
+    NavBarComponent ],
   imports: [
- 
-    BrowserModule,
+   BrowserModule,
     AppRoutingModule,
     ModuleMyTodoModule
-   
-  ],
+   ],
   providers: [],
   bootstrap: [AppComponent]
 })

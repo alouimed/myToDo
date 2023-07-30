@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, map, tap } from 'rxjs';
 import { Todo } from '../todoModel/todoModel';
-import { TodoService } from 'src/app/services/todo.service';
+import { TodoService } from 'src/app/module-my-todo/services/todo.service';
 
 @Component({
   selector: 'app-todo-list',
@@ -9,33 +8,41 @@ import { TodoService } from 'src/app/services/todo.service';
   styleUrls: ['./todo-list.component.css']
 })
 export class TodoListComponent implements OnInit {
-  todos$ !: Observable<Todo[]>;
-  paginatedTodos$!: Observable<Todo[]>;
+  
+  totalPages!: number;
+  todos: Todo[] = [];
   currentPage = 1;
   itemsPerPage = 5;
-  totalPages!: number;
+  paginatedTodos: Todo[] = [];
 
   constructor(private todoService: TodoService) { }
 
   ngOnInit() {
-    this.loadTodos();
-  }
+    this.todoService.getTodos().subscribe(todos => {
+      this.todos = todos;
+      this.totalPages = Math.ceil(this.todos.length / this.itemsPerPage);
+      this.paginateTodos();
+    });
+ }
 
-  loadTodos() {
-    // Charger les todos depuis le service, puis appliquer la pagination
-    this.todos$ = this.todoService.getTodos();
-    this.paginatedTodos$ = this.todos$.pipe(
-      map(todos => {
-        this.totalPages = Math.ceil(todos.length / this.itemsPerPage);
-        return todos.slice((this.currentPage - 1) * this.itemsPerPage, this.currentPage * this.itemsPerPage);
-      })
-    );
+  paginateTodos() {
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    const endIndex = startIndex + this.itemsPerPage;
+    this.paginatedTodos = this.todos.slice(startIndex, endIndex);
   }
  
   onPageChange(page: number) {
     this.currentPage = page;
-    this.loadTodos(); // Recharger les todos pour afficher la page demandée
- 
+    this.paginateTodos(); // Recharger les todos pour afficher la page demandée
   }
-
+  onTodoStateChange(todo: Todo) {
+    todo.state = !todo.state;
+    this.todoService.updateTodoState(todo.id, todo.state).subscribe(() => {
+      if (todo.state) {
+        this.todos = this.todos.filter(t => t.id !== todo.id);
+        this.todos.push(todo);
+ }
+      this.paginateTodos();
+    });
+  }
 }

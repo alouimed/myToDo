@@ -6,6 +6,7 @@ import { UpdateTodoComponent } from './update-todo/update-todo.component';
 import { PaginationComponent } from './pagination/pagination.component';
 import { ModuleMyTodoRoutingModule } from './module-my-todo-routing.module';
 import { AddTodoComponent } from './add-todo/add-todo.component';
+import { DoneToBottomPipe } from './pipes/done-to-bottom.pipe';
 
 
 
@@ -15,7 +16,8 @@ import { AddTodoComponent } from './add-todo/add-todo.component';
     DetailTodoComponent,
     UpdateTodoComponent,
     PaginationComponent,
-    AddTodoComponent
+    AddTodoComponent,
+    DoneToBottomPipe
   ],
   imports: [
     CommonModule,
